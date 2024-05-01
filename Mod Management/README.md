@@ -45,6 +45,10 @@ Removes a mod from the list of installed mods. You can specify either the index 
 
 Allows you to change the order of installed mods. You will be asked to provide the current index of the mod and the index where you want to move it.
 
+## Add-CommaSeparatedModListToClipboard
+
+Allows you to quickly extract and copy a comma-separated mod list from the GameUserSettings.ini, which you can then paste wherever needed.
+
 ## Example
 
-![Screenshot of powershell window demonstrating the usage of the script](https://i.imgur.com/HOer9lq.png)
+![Screenshot of powershell window demonstrating the usage of the script](https://i.imgur.com/slIJtg9.png)

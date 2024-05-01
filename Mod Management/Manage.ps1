@@ -45,7 +45,7 @@ function Print-ModList {
     }
 
     # Output table footer with borders
-    Write-Host "╚════════╩════════════════════════════════==═════════════════════════╩══════════╝"
+    Write-Host "╚════════╩═══════════════════════════════════════════════════════════╩══════════╝"
 }
 
 
@@ -142,6 +142,18 @@ function Switch-ModOrder {
     }
 }
 
+# Function to add comma separated mod list to the clipboard
+function Add-CommaSeparatedModListToClipboard {
+    param (
+        [string]$GameUserSettingsPath
+    )
+
+    $modsLine = Get-Content $GameUserSettingsPath | Where-Object { $_ -like "Mods=*" }
+    $modsLine = $modsLine -replace '^Mods=', ''
+    Set-Clipboard -Value $modsLine
+    Write-Host "Comma-separated mod list copied to clipboard."
+}
+
 
 # Main script
 $GameUserSettingsPath = "GameUserSettings.ini"
@@ -153,6 +165,7 @@ Write-Host "╔═════════════════════�
 Write-Host "║ 1. Add a mod by ID                                         ║"
 Write-Host "║ 2. Remove a mod by index or ID                             ║"
 Write-Host "║ 3. Switch mod order                                        ║"
+Write-Host "║ 4. Add comma separated mod list to the clipboard           ║"
 Write-Host "╚════════════════════════════════════════════════════════════╝"
 
 $option = Read-Host "Enter option number"
@@ -169,7 +182,7 @@ switch ($option) {
     '3' {
         Switch-ModOrder -GameUserSettingsPath $GameUserSettingsPath
     }
-    default {
-        Write-Host "Invalid option."
+    '4' {
+        Add-CommaSeparatedModListToClipboard -GameUserSettingsPath $GameUserSettingsPath
     }
 }
