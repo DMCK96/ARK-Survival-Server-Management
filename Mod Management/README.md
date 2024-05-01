@@ -44,8 +44,3 @@ Removes a mod from the list of installed mods. You can specify either the index 
 ### Switch-ModOrder
 
 Allows you to change the order of installed mods. You will be asked to provide the current index of the mod and the index where you want to move it.
-
-## Example
-
-```powershell
-.\ModManager.ps1
