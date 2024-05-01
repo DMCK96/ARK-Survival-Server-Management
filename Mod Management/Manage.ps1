@@ -105,7 +105,7 @@ function Remove-Mod {
         $modIDToRemove = $modIdentifier
     }
     $modIDs = $modIDs | Where-Object { $_ -ne $modIDToRemove }
-    $newModsLine = "ActiveMods=" + ($modIDs -join ",")
+    $newModsLine = "Mods=" + ($modIDs -join ",")
     (Get-Content $GameUserSettingsPath) -replace $modsLine, $newModsLine | Set-Content $GameUserSettingsPath
     Write-Host "Mod removed successfully."
     Print-ModList -GameUserSettingsPath $GameUserSettingsPath
