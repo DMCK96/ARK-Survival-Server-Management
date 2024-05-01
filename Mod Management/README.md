@@ -17,7 +17,7 @@ This PowerShell script helps you manage mods for your ARK Survival Ascended serv
 5. Run the script using the following command:
 
     ```powershell
-    .\ModManager.ps1
+    .\Manage.ps1
     ```
 
 5. Follow the on-screen instructions to perform various operations on your mods.
