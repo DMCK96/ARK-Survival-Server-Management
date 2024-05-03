@@ -69,8 +69,8 @@ function Add-Mod {
         
         if ($index -ge 0 -and $index -lt $modIDs.Count) {
             Write-Host "Shifting mods to accommodate insertion at index $index..."
-            # Shift mod IDs to accommodate the new insertion
-            $modIDs = $modIDs[0..$index] + $modID + $modIDs[$index..($modIDs.Count - 1)]
+            # Rebuild the modIDs array with the new mod ID inserted at the specified index
+            $modIDs = $modIDs[0..($index - 1)] + $modID + $modIDs[$index..($modIDs.Count - 1)]
         }
         else {
             Write-Host "Index $index is out of range. Adding mod to the end of the list."
