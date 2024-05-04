@@ -16,7 +16,6 @@ function Get-ModInfo {
     }
 }
 
-
 # Function to print mod list
 function Print-ModList {
     param (
@@ -47,7 +46,6 @@ function Print-ModList {
     # Output table footer with borders
     Write-Host "╚════════╩═══════════════════════════════════════════════════════════╩══════════╝"
 }
-
 
 # Function to add a mod by ID with optional index
 function Add-Mod {
@@ -87,7 +85,6 @@ function Add-Mod {
     $newModsLine = "Mods=" + ($modIDs -join ",")
     (Get-Content $GameUserSettingsPath) -replace $modsLine, $newModsLine | Set-Content $GameUserSettingsPath
     Write-Host "Mod added successfully."
-    Print-ModList -GameUserSettingsPath $GameUserSettingsPath
 }
 
 
@@ -108,8 +105,8 @@ function Remove-Mod {
     $newModsLine = "Mods=" + ($modIDs -join ",")
     (Get-Content $GameUserSettingsPath) -replace $modsLine, $newModsLine | Set-Content $GameUserSettingsPath
     Write-Host "Mod removed successfully."
-    Print-ModList -GameUserSettingsPath $GameUserSettingsPath
 }
+
 
 # Function to switch mod order with specified index
 function Switch-ModOrder {
@@ -135,7 +132,6 @@ function Switch-ModOrder {
         $newModsLine = "Mods=" + ($modIDs -join ",")
         (Get-Content $GameUserSettingsPath) -replace $modsLine, $newModsLine | Set-Content $GameUserSettingsPath
         Write-Host "Mod order switched successfully."
-        Print-ModList -GameUserSettingsPath $GameUserSettingsPath
     }
     else {
         Write-Host "Invalid existing or new index provided."
@@ -157,32 +153,50 @@ function Add-CommaSeparatedModListToClipboard {
 
 # Main script
 $GameUserSettingsPath = "GameUserSettings.ini"
-Print-ModList -GameUserSettingsPath $GameUserSettingsPath
 
-# Output menu options in a bordered table format
-Write-Host "Options:"
-Write-Host "╔════════════════════════════════════════════════════════════╗"
-Write-Host "║ 1. Add a mod by ID                                         ║"
-Write-Host "║ 2. Remove a mod by index or ID                             ║"
-Write-Host "║ 3. Switch mod order                                        ║"
-Write-Host "║ 4. Add comma separated mod list to the clipboard           ║"
-Write-Host "╚════════════════════════════════════════════════════════════╝"
+# Function to display the main menu
+function Show-MainMenu {
+    Print-ModList -GameUserSettingsPath $GameUserSettingsPath
 
-$option = Read-Host "Enter option number"
+    # Output menu options in a bordered table format
+    Write-Host "Options:"
+    Write-Host "╔════════════════════════════════════════════════════════════╗"
+    Write-Host "║ 1. Add a mod by ID                                         ║"
+    Write-Host "║ 2. Remove a mod by index or ID                             ║"
+    Write-Host "║ 3. Switch mod order                                        ║"
+    Write-Host "║ 4. Add comma separated mod list to the clipboard           ║"
+    Write-Host "╚════════════════════════════════════════════════════════════╝"
 
-switch ($option) {
-    '1' {
-        $modID = Read-Host "Enter mod ID to add"
-        Add-Mod -GameUserSettingsPath $GameUserSettingsPath -modID $modID
-    }
-    '2' {
-        $modIdentifier = Read-Host "Enter mod index or ID to remove"
-        Remove-Mod -GameUserSettingsPath $GameUserSettingsPath -modIdentifier $modIdentifier
-    }
-    '3' {
-        Switch-ModOrder -GameUserSettingsPath $GameUserSettingsPath
-    }
-    '4' {
-        Add-CommaSeparatedModListToClipboard -GameUserSettingsPath $GameUserSettingsPath
+    $option = Read-Host "Enter option number"
+
+    switch ($option) {
+        '1' {
+            $modID = Read-Host "Enter mod ID to add"
+            Add-Mod -GameUserSettingsPath $GameUserSettingsPath -modID $modID
+            Show-MainMenu
+        }
+        '2' {
+            $modIdentifier = Read-Host "Enter mod index or ID to remove"
+            Remove-Mod -GameUserSettingsPath $GameUserSettingsPath -modIdentifier $modIdentifier
+            Show-MainMenu
+        }
+        '3' {
+            Switch-ModOrder -GameUserSettingsPath $GameUserSettingsPath
+            Show-MainMenu
+        }
+        '4' {
+            Add-CommaSeparatedModListToClipboard -GameUserSettingsPath $GameUserSettingsPath
+            Show-MainMenu
+        }
+        '5' {
+            exit
+        }
+        default {
+            Write-Host "Invalid option. Please select a valid option."
+            Show-MainMenu
+        }
     }
 }
+
+# Start the main menu
+Show-MainMenu
