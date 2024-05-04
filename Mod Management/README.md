@@ -14,12 +14,7 @@ This PowerShell script helps you manage mods for your ARK Survival Ascended serv
 2. Open PowerShell.
 3. Navigate to the directory where the script is located.
 4. Copy your GameUserSettings.ini file into this same directory
-5. Run the script using the following command:
-
-    ```powershell
-    .\Manage.ps1
-    ```
-
+5. Run the script by right clicking 'Manage.ps1' and click "Run with PowerShell"
 5. Follow the on-screen instructions to perform various operations on your mods.
 6. Copy your GameUserSettings.ini file back to it's previous location
 
