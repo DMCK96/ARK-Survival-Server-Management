@@ -4,6 +4,8 @@
 
 This PowerShell script helps you manage mods for your ARK Survival Ascended server. You can add, remove, and reorder mods easily using this script.
 
+**Note: This makes direct changes to the Mods= key in the GameUserSettings.ini file in the same folder.** 
+
 ## Prerequisites
 
 - PowerShell installed on your system. 
